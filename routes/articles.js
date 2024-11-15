@@ -51,14 +51,18 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Delete an article
 router.delete('/:id', async (req, res) => {
   try {
-    await Article.findByIdAndDelete(req.params.id);
+    const article = await Article.findByIdAndDelete(req.params.id);
+    if (!article) {
+      return res.status(404).json({ message: 'Article not found' });
+    }
     res.json({ message: 'Article deleted successfully' });
   } catch (error) {
+    console.error("Error deleting article:", error);  // Log the error on the server
     res.status(500).json({ error: error.message });
   }
 });
+
 
 module.exports = router;
