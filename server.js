@@ -24,6 +24,9 @@ app.use('/api/articles', articleRoutes);
 const contactRoutes = require('./routes/contact.routes');
 app.use('/api/contact', contactRoutes);
 
+const commentRoutes = require('./routes/comment'); // Import comment routes
+app.use('/api/comments', commentRoutes); // Comment routes
+
 // const articles = require('./routes/articles');
 // app.delete('/api/articles', articleController.deleteArticle);
 
