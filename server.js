@@ -2,7 +2,6 @@
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
-const articleRoutes = require('./routes/articleRoutes');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -17,7 +16,17 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+const articleRoutes = require('./routes/articleRoutes');
 app.use('/api', articleRoutes);
+app.use('/api/articles/:id', articleRoutes);
+app.use('/api/articles', articleRoutes);
+
+const contactRoutes = require('./routes/contact.routes');
+app.use('/api/contact', contactRoutes);
+
+// const articles = require('./routes/articles');
+// app.delete('/api/articles', articleController.deleteArticle);
+
 
 // Start the server
 const PORT = process.env.PORT || 5000;
